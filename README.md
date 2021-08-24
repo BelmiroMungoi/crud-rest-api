@@ -1,2 +1,2 @@
-# CrudRestApi
- Um crud de pessoas/usuario usando spring rest api
+# crud-rest-api
+ Crud de pessoa com Spring Rest Api
