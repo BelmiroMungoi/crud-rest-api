@@ -11,6 +11,6 @@ import com.bbm.crudrestapi.model.UsuarioEntity;
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
-	@Query(value = "select u from UsuarioEntity u where upper(trim(u.nomecompleto)) like %?1%")
-	public List<UsuarioEntity> findByName(String name);
+	@Query(value = "select u from UsuarioEntity u where upper(trim(u.nomeCompleto)) like %?1%")
+	List<UsuarioEntity> findByName(String name);
 }
