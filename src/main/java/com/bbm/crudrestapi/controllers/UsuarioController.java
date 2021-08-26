@@ -62,6 +62,15 @@ public class UsuarioController {
 		return new ResponseEntity<UsuarioEntity>(entity, HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/buscarPorNome")
+	@ResponseBody
+	public ResponseEntity<List<UsuarioEntity>> buscarPorNome(@RequestParam(name = "name") String name) {
+
+		List<UsuarioEntity> lista = repository.findByName(name.trim().toUpperCase());
+
+		return new ResponseEntity<List<UsuarioEntity>>(lista, HttpStatus.OK);
+	}
+
 	@PutMapping(value = "/atualizar")
 	@ResponseBody
 	public ResponseEntity<?> atualizar(@RequestBody UsuarioEntity usuario) {
