@@ -53,7 +53,7 @@ public class UsuarioController {
 		return new ResponseEntity<String>("Deletado com sucesso", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/buscarusuario")
+	@RequestMapping(value = "/buscarUsuario")
 	@ResponseStatus
 	public ResponseEntity<UsuarioEntity> buscar(@RequestParam(name = "id") Long id) {
 
