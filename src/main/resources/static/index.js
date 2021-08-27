@@ -17,7 +17,7 @@ function salvarUsuario() {
 		alert("Preencha o campo BI!!!");
 		return false;
 
-	} else if (idade = '') {
+	} else if (idade == '') {
 		alert("Preencha o campo Idade");
 		return false;
 
