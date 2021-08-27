@@ -53,7 +53,8 @@ html {
 				onclick="document.getElementById('formUser').reset();">Novo</button>
 			<button type="button" class="btn btn-danger" data-bs-toggle="modal"
 				data-bs-target="#modalPesquisar">Pesquisar</button>
-
+			<button type="button" class="btn btn-warning"
+				onclick="deletarUsuario()">Deletar</button>
 		</div>
 	</form>
 
@@ -166,7 +167,7 @@ html {
 								+ '</td><td>'+response[i].nrPhone
 								+'</td><td><button type="button" onclick="editar('
 								+ response[i].id
-								+ ')" class="btn btn-primary">Ver</button></td><td><button type="button" class="btn btn-danger" onclick="deleteUser('
+								+ ')" class="btn btn-primary">Ver</button></td><td><button type="button" class="btn btn-danger" onclick="delete('
 								+ response[i].id
 								+ ')">Delete</button></td></tr>');
 						}
@@ -176,25 +177,57 @@ html {
 					alert("Erro ao buscar usuario: " + xhr.responseText);
 				});
 			}
+		}
 			
-			function editar(id){
+	
+		function editar(id) {
+			$.ajax({
+				method : "GET",
+				url : "buscarUsuario",
+				data : "id=" + id,
+				success : function(response) {
+
+					$("#id").val(response.id);
+					$("#nomeCompleto").val(response.nomeCompleto);
+					$("#cell").val(response.nrPhone);
+					$("#bi").val(response.bi);
+					$("#idade").val(response.idade);
+
+					$('#modalPesquisarUser').modal('hide');
+				}
+			}).fail(function(xhr, status, errorThrown) {
+				alert("Erro ao buscar usuario por id: " + xhr.responseText);
+			});
+		}
+
+		function deletar(id) {
+			
+			if (confirm('Deseja realmente excluir???')) {
+
+				
 				$.ajax({
-					method : "GET",
-					url : "buscarUsuario",
+					method : "DELETE",
+					url : "delete",
 					data : "id=" + id,
 					success : function(response) {
 
-						$("#id").val(response.id);
-						$("#nomeCompleto").val(response.nomeCompleto);
-						$("#cell").val(response.nrPhone);
-						$("#bi").val(response.bi);
-						$("#idade").val(response.idade);
+						$('#' + id).remove();
 
-						$('#modalPesquisarUser').modal('hide');
+						alert(response);
 					}
 				}).fail(function(xhr, status, errorThrown) {
-					alert("Erro ao buscar usuario por id: " + xhr.responseText);
-				});
+					alert("Erro ao deletar usuario por id: " + xhr.responseText);
+			});
+
+			}
+		}
+		
+		function deletarUsuario(){
+			var id = $('#id').val();
+
+			if (id != null && id != "") {
+				deletar(id);
+				document.getElementById('formUser').reset();
 			}
 		}
 	</script>
