@@ -1,0 +1,4 @@
+com\bbm\crudrestapi\controllers\UsuarioController.class
+com\bbm\crudrestapi\model\UsuarioEntity.class
+com\bbm\crudrestapi\repository\UsuarioRepository.class
+com\bbm\crudrestapi\Application.class
